@@ -53,12 +53,7 @@ const common = {
         parallel: true,
         terserOptions: {
           compress: {
-            // module: true,
-            // toplevel: true,
-            drop_console: false,
             pure_funcs: ["console.log"],
-            collapse_vars: false,
-            reduce_vars: false,
           },
         },
       }),
@@ -82,7 +77,13 @@ const common = {
     //     },
     // },
   },
-  plugins: [new CaseSensitivePathsPlugin()],
+  plugins: [
+    new CaseSensitivePathsPlugin(),
+    new HtmlWebpackPlugin({
+      inject: true,
+      template: path.resolve(__dirname, "public/index.html"),
+    }),
+  ],
   resolve: {
     modules: ["./node_modules"],
     extensions: [".tsx", ".ts", ".jsx", ".js", ".json", ".less", ".css"],
@@ -106,7 +107,7 @@ const dev = {
   },
   devServer: {
     static: {
-      directory: path.resolve(__dirname, "public"),
+      directory: path.resolve(__dirname, "wwwroot"),
       publicPath: "",
       watch: {
         ignored: /node_modules/,
@@ -126,22 +127,6 @@ const dev = {
       filename: "[name].css",
       chunkFilename: "[name].css",
     }),
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: path.resolve(__dirname, "public/index.html"),
-    }),
-    // new CopyPlugin({
-    //   patterns: [
-    //     {
-    //       context: "public",
-    //       from: "*",
-    //       filter: (resourcePath) => {
-    //         return fs.realpathSync(resourcePath) != path.resolve(__dirname, "public/index.html");
-    //       },
-    //       to: "",
-    //     },
-    //   ],
-    // }),
   ],
 };
 
@@ -159,6 +144,18 @@ const prod = {
     new MiniCssExtractPlugin({
       filename: "[name].[contenthash:8].css",
       chunkFilename: "[name].[contenthash:8].css",
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          context: "public",
+          from: "*",
+          filter: (resourcePath) => {
+            return fs.realpathSync(resourcePath) != path.resolve(__dirname, "public/index.html");
+          },
+          to: "",
+        },
+      ],
     }),
   ],
 };

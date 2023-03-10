@@ -1,0 +1,49 @@
+@border-color: #dcdfe6;
+@color: #606266;
+
+.c-button {
+  padding: var(--s) var(--m);
+  color: @color;
+  background-color: var(--white);
+  border: 1px solid @border-color;
+  border-radius: var(--xs);
+
+  &:hover {
+    color: var(--theme-5);
+    border-color: var(--theme-2);
+    background-color: var(--theme-0);
+    cursor: pointer;
+  }
+
+  &:active {
+    border-color: var(--theme-6);
+  }
+
+  &-theme {
+    color: var(--white);
+    background-color: var(--theme-6);
+    border-color: var(--theme-6);
+
+    &:hover {
+      color: var(--white);
+      background-color: var(--theme-5);
+      border-color: var(--theme-5);
+    }
+
+    &:active {
+      color: var(--white);
+      background-color: var(--theme-7);
+      border-color: var(--theme-7);
+    }
+  }
+
+  &-icon {
+    width: 1.5rem;
+    aspect-ratio: 1/1;
+    padding: 0;
+  }
+
+  & + & {
+    margin-left: var(--s);
+  }
+}

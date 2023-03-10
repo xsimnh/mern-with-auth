@@ -1,0 +1,60 @@
+.c-modal {
+  //   display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  padding: var(--m) 0;
+
+  &-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--theme-0);
+    opacity: 0.5;
+  }
+
+  &-content {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    max-height: 100%;
+    background-color: var(--white);
+    border-radius: var(--s);
+    box-shadow: 0 2px 8px var(--theme-10);
+  }
+  &-closable {
+    position: absolute;
+    top: var(--s);
+    right: var(--m);
+
+    &::before {
+      content: "x";
+    }
+  }
+  &-header {
+    padding: var(--s) var(--m);
+    border-bottom: 1px solid var(--theme-4);
+  }
+  &-body {
+    flex: 1;
+    padding: var(--s) var(--m);
+    overflow-y: auto;
+  }
+  &-footer {
+    padding: var(--s) var(--m);
+    border-top: 1px solid var(--theme-4);
+    text-align: right;
+  }
+}
