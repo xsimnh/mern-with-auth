@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Button, Modal } from "./components";
+import { Button, Modal } from "@/components";
 
-function App() {
+function Home() {
   const [modal1, setModal1] = useState(false);
   const [modal2, setModal2] = useState(false);
 
@@ -25,4 +25,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;

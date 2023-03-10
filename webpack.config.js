@@ -17,6 +17,7 @@ const common = {
     clean: true,
     filename: "[name].js",
     path: path.resolve(__dirname, "wwwroot"),
+    // publicPath: "/",
   },
   module: {
     rules: [
@@ -87,6 +88,9 @@ const common = {
   resolve: {
     modules: ["./node_modules"],
     extensions: [".tsx", ".ts", ".jsx", ".js", ".json", ".less", ".css"],
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
   },
 };
 
@@ -118,6 +122,7 @@ const dev = {
     open: true,
     https: true,
     compress: true,
+    historyApiFallback: true,
   },
   optimization: {
     minimize: false,
