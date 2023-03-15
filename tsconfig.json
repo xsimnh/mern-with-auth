@@ -16,8 +16,11 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@/*": ["./src/*"],
+      "@components": ["./src/components/index"],
+      "@utils": ["./src/utils/index"]
+    },
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
   "include": ["src"]
 }

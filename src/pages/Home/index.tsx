@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { Button, Modal } from "@/components";
+import { Button, Modal } from "@components";
+import styles from "./index.module.less";
 
 function Home() {
   const [modal1, setModal1] = useState(false);
   const [modal2, setModal2] = useState(false);
 
   return (
-    <div>
-      <Button text="show modal1" onClick={() => setModal1(true)} />
+    <div className={styles.root}>
+      <Button className={styles.button} text="show modal1" onClick={() => setModal1(true)} />
       <Button text="show modal2" onClick={() => setModal2(true)} />
       <Button icon="c-modal-closable" />
       <Button theme text="theme button" />
