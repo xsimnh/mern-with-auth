@@ -18,6 +18,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@components": ["./src/components/index"],
+      "@hooks": ["./src/hooks/index"],
       "@utils": ["./src/utils/index"]
     },
     "plugins": [{ "name": "typescript-plugin-css-modules" }]

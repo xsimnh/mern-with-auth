@@ -1,6 +1,6 @@
 const TerserPlugin = require("terser-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+// const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const { merge } = require("webpack-merge");
 
 const common = require("./webpack.common");
@@ -42,5 +42,5 @@ module.exports = merge(common, {
       },
     },
   },
-  plugins: [new BundleAnalyzerPlugin()],
+  //   plugins: [new BundleAnalyzerPlugin()],
 });

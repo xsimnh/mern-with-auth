@@ -1,6 +1,5 @@
 import React from "react";
-import type { RouteObject } from "react-router-dom";
-import { Outlet, Link, useRoutes } from "react-router-dom";
+import { Outlet, Link, useRoutes, type RouteObject } from "react-router-dom";
 
 const Home = React.lazy(() => import(/* webpackChunkName: "home" */ "./pages/Home"));
 const About = React.lazy(() => import(/* webpackChunkName: "about" */ "./pages/About"));

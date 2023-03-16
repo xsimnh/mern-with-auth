@@ -1,0 +1,13 @@
+/public/**
+/wwwroot/**
+
+/webpack.*.js
+/**/*.css
+/**/*.less
+/**/*.json
+/**/*.png
+/**/*.svg
+/**/*.ico
+/**/*.gif
+/**/*.html
+/**/*.md
