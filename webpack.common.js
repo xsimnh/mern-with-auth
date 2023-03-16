@@ -4,7 +4,7 @@ const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 // const CopyPlugin = require("copy-webpack-plugin");
 
-const isDev = process.env.NODE_ENV === "development";
+const isDevelopment = process.env.NODE_ENV === "development";
 
 module.exports = {
   target: "browserslist",
@@ -13,8 +13,8 @@ module.exports = {
   },
   output: {
     clean: true,
-    filename: isDev ? "[name].js" : "[name].[contenthash:8].js",
-    chunkFilename: isDev ? "[name].js" : "[name].[contenthash:8].js",
+    filename: isDevelopment ? "[name].js" : "[name].[contenthash:8].js",
+    chunkFilename: isDevelopment ? "[name].js" : "[name].[contenthash:8].js",
     path: path.resolve(__dirname, "wwwroot"),
     publicPath: "/",
   },
@@ -49,7 +49,7 @@ module.exports = {
                   }
                   return "global";
                 },
-                localIdentName: isDev ? "[path][name]__[local]" : "[hash:base64]",
+                localIdentName: isDevelopment ? "[path][name]__[local]" : "[hash:base64]",
               },
             },
           },
@@ -67,14 +67,26 @@ module.exports = {
       {
         test: /\.(js|jsx|ts|tsx)$/i,
         include: path.resolve(__dirname, "./src"),
-        use: "babel-loader",
+        use: [
+          {
+            loader: "babel-loader",
+            options: {
+              presets: ["@babel/preset-env", "@babel/preset-react", "@babel/preset-typescript"],
+              plugins: [
+                isDevelopment && "react-refresh/babel",
+                //   BUG: cannot filter polyfill well with targets option, see detail https://github.com/babel/babel/issues/13226
+                //   ["@babel/plugin-transform-runtime", { "corejs": 3 }]
+              ].filter(Boolean),
+            },
+          },
+        ],
       },
     ],
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: isDev ? "[name].css" : "[name].[contenthash:8].css",
-      chunkFilename: isDev ? "[name].css" : "[name].[contenthash:8].css",
+      filename: isDevelopment ? "[name].css" : "[name].[contenthash:8].css",
+      chunkFilename: isDevelopment ? "[name].css" : "[name].[contenthash:8].css",
     }),
     new CaseSensitivePathsPlugin(),
     new HtmlWebpackPlugin({
@@ -85,7 +97,7 @@ module.exports = {
       inject: true,
       hash: true,
       cache: false,
-      minify: isDev ? false : true,
+      minify: isDevelopment ? false : true,
     }),
     // new CopyPlugin({
     //   patterns: [

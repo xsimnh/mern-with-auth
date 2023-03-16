@@ -1,5 +1,6 @@
 const path = require("path");
 // const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const { merge } = require("webpack-merge");
 
 // const smp = new SpeedMeasurePlugin();
@@ -32,6 +33,7 @@ module.exports = merge(common, {
   optimization: {
     minimize: false,
   },
+  plugins: [new ReactRefreshWebpackPlugin()],
 });
 
 // module.exports = smp.wrap(config);
