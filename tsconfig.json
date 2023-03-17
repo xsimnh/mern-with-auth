@@ -1,12 +1,11 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES2021",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
@@ -15,11 +14,10 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "sourceMap": true,
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@components": ["./src/components/index"],
-      "@hooks": ["./src/hooks/index"],
-      "@utils": ["./src/utils/index"]
+      "@/*": ["src/*"]
     },
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },

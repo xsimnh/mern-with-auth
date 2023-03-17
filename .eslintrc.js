@@ -42,6 +42,7 @@ module.exports = {
 
     // typescript
     "prefer-const": "warn",
+    "@typescript-eslint/no-explicit-any": "off",
 
     // enhances error
     "semi": "error",

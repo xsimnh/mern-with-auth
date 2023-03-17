@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Modal } from "@components";
+import { Button, Modal } from "@/components";
 import styles from "./index.module.less";
 
 function Home() {

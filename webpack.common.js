@@ -116,9 +116,6 @@ module.exports = {
     extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
     alias: {
       "@": path.resolve(__dirname, "./src"),
-      "@components": path.resolve(__dirname, "./src/components/index"),
-      "@hooks": path.resolve(__dirname, "./src/hooks/index"),
-      "@utils": path.resolve(__dirname, "./src/utils/index"),
     },
   },
 };
