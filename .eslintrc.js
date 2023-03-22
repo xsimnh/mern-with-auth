@@ -20,6 +20,7 @@ module.exports = {
   "globals": {
     "module": "readonly",
     "require": "readonly",
+    "process": "readonly",
     "__dirname": "readonly",
     // "jQuery": "readonly",
     // "$": "readonly"
@@ -65,7 +66,8 @@ module.exports = {
     "no-duplicate-imports": "error",
 
     // enhances warn
-    "no-unused-vars": [
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
       "warn",
       {
         "args": "none",
@@ -74,5 +76,6 @@ module.exports = {
         "vars": "all",
       },
     ],
+    "@typescript-eslint/no-inferrable-types": "warn",
   },
 };

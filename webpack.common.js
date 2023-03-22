@@ -67,19 +67,7 @@ module.exports = {
       {
         test: /\.(js|jsx|ts|tsx)$/i,
         include: path.resolve(__dirname, "./src"),
-        use: [
-          {
-            loader: "babel-loader",
-            options: {
-              presets: ["@babel/preset-env", "@babel/preset-react", "@babel/preset-typescript"],
-              plugins: [
-                isDevelopment && "react-refresh/babel",
-                //   BUG: cannot filter polyfill well with targets option, see detail https://github.com/babel/babel/issues/13226
-                //   ["@babel/plugin-transform-runtime", { "corejs": 3 }]
-              ].filter(Boolean),
-            },
-          },
-        ],
+        use: "babel-loader",
       },
     ],
   },

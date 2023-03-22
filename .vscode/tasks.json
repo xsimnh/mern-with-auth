@@ -3,9 +3,9 @@
   "tasks": [
     {
       "type": "npm",
-      "script": "serve",
+      "script": "start",
       "problemMatcher": [],
-      "label": "npm: serve",
+      "label": "npm: start",
       "detail": "cross-env NODE_ENV=development webpack serve --config webpack.dev.js"
     },
     {
@@ -29,6 +29,13 @@
       "options": {
         "cwd": "${workspaceFolder}"
       }
+    },
+    {
+      "type": "npm",
+      "script": "serve",
+      "problemMatcher": [],
+      "label": "npm: serve",
+      "detail": "node serve.js"
     }
   ]
 }
