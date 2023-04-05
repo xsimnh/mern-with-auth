@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const express = require("express");
 const compression = require("compression");
 const proxy = require("express-http-proxy");
@@ -6,20 +5,21 @@ const path = require("path");
 const https = require("https");
 const fs = require("fs");
 
+const appPath = require("./path");
 const app = express();
 
 app.use(compression());
-app.use(express.static(path.resolve(__dirname, "wwwroot")));
+app.use(express.static(appPath.wwwroot));
 app.use("/api", proxy("http://localhost:9000"));
 
 app.get("/*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "wwwroot/index.html"));
+  res.sendFile(appPath.get("wwwroot/index.html"));
 });
 
 const host = "localhost";
 const options = {
-  key: fs.readFileSync(path.resolve(__dirname, "cert/" + host + ".key")),
-  cert: fs.readFileSync(path.resolve(__dirname, "cert/" + host + ".cert")),
+  key: fs.readFileSync(appPath.get("cert/" + host + ".key")),
+  cert: fs.readFileSync(appPath.get("cert/" + host + ".cert")),
   requestCert: false,
   rejectUnauthorized: false,
 };

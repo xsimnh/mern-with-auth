@@ -5,22 +5,25 @@
       "type": "npm",
       "script": "start",
       "problemMatcher": [],
-      "label": "npm: start",
-      "detail": "cross-env NODE_ENV=development webpack serve --config webpack.dev.js"
+      "label": "npm: start"
     },
     {
       "type": "npm",
       "script": "build",
       "problemMatcher": [],
-      "label": "npm: build",
-      "detail": "cross-env NODE_ENV=development webpack --config webpack.dev.js"
+      "label": "npm: build"
+    },
+    {
+      "type": "npm",
+      "script": "watch",
+      "problemMatcher": [],
+      "label": "npm: watch"
     },
     {
       "type": "npm",
       "script": "prod",
       "problemMatcher": [],
-      "label": "npm: prod",
-      "detail": "cross-env NODE_ENV=production webpack --config webpack.prod.js"
+      "label": "npm: prod"
     },
     {
       "type": "shell",
@@ -34,8 +37,7 @@
       "type": "npm",
       "script": "serve",
       "problemMatcher": [],
-      "label": "npm: serve",
-      "detail": "node serve.js"
+      "label": "npm: serve"
     }
   ]
 }

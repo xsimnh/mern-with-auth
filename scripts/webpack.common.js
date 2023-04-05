@@ -1,10 +1,10 @@
-const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 // const CopyPlugin = require("copy-webpack-plugin");
 
 const isDevelopment = process.env.NODE_ENV === "development";
+const appPath = require("./path");
 
 module.exports = {
   target: "browserslist",
@@ -15,14 +15,14 @@ module.exports = {
     clean: true,
     filename: isDevelopment ? "[name].js" : "[name].[contenthash:8].js",
     chunkFilename: isDevelopment ? "[name].js" : "[name].[contenthash:8].js",
-    path: path.resolve(__dirname, "wwwroot"),
+    path: appPath.wwwroot,
     publicPath: "/",
   },
   module: {
     rules: [
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/i,
-        include: path.resolve(__dirname, "./src"),
+        include: appPath.src,
         type: "asset",
         parser: {
           dataUrlCondition: {
@@ -30,12 +30,12 @@ module.exports = {
           },
         },
         generator: {
-          filename: "images/[name].[contenthash:8][ext]",
+          filename: `images/[name].${isDevelopment ? "" : "[contenthash:8]"}[ext]`,
         },
       },
       {
         test: /\.(less|css)$/i,
-        include: path.resolve(__dirname, "./src"),
+        include: appPath.src,
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -66,7 +66,7 @@ module.exports = {
       },
       {
         test: /\.(js|jsx|ts|tsx)$/i,
-        include: path.resolve(__dirname, "./src"),
+        include: appPath.src,
         use: "babel-loader",
       },
     ],
@@ -78,12 +78,12 @@ module.exports = {
     }),
     new CaseSensitivePathsPlugin(),
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "public/index.html"),
-      favicon: path.resolve(__dirname, "public/favicon.ico"),
+      template: appPath.get("public/index.html"),
+      favicon: appPath.get("public/favicon.ico"),
       appleTouchIcon: "/favicon.ico",
       filename: "index.html",
       inject: true,
-      hash: true,
+      hash: !isDevelopment,
       cache: false,
       minify: isDevelopment ? false : true,
     }),
@@ -103,7 +103,7 @@ module.exports = {
     modules: ["./node_modules"],
     extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      "@": appPath.src,
     },
   },
 };
