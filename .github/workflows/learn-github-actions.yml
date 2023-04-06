@@ -1,13 +1,23 @@
 name: learn-github-actions
 run-name: ${{ github.actor }} is learning GitHub Actions
-on: [push]
+on:
+  push:
+    branches:
+      - action-demo
 jobs:
-  check-bats-version:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install and Build
+        run: |
+          npm ci
+          npm run prod
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          node-version: "14"
-      - run: npm install -g bats
-      - run: bats -v
+          folder: wwwroot
+          clean: true
