@@ -24,7 +24,7 @@
   "bugs": {
     "url": "https://github.com/xsimnh/react-template/issues"
   },
-  "homepage": "https://github.com/xsimnh/react-template#readme",
+  "homepage": "https://xsimnh.github.io/react-template",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
