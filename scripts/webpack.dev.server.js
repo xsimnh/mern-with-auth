@@ -7,7 +7,7 @@ module.exports = merge(dev, {
   devServer: {
     static: {
       directory: appPath.wwwroot,
-      publicPath: "./",
+      publicPath: appPath.publicPath,
     },
     port: 7000,
     open: true,

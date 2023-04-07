@@ -16,7 +16,7 @@ module.exports = {
     filename: isDevelopment ? "[name].js" : "[name].[contenthash:8].js",
     chunkFilename: isDevelopment ? "[name].js" : "[name].[contenthash:8].js",
     path: appPath.wwwroot,
-    publicPath: "/",
+    publicPath: appPath.publicPath,
   },
   module: {
     rules: [
