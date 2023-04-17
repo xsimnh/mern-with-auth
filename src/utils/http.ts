@@ -1,6 +1,6 @@
-import { queryString } from "@/utils";
+import { queryString } from "./url";
 
-const enum HttpMethod {
+export const enum HttpMethod {
   GET = "GET",
   POST = "POST",
   PUT = "PUT",
@@ -14,13 +14,13 @@ export interface RequestOptions extends RequestInit {
   method?: HttpMethod;
 }
 
-interface RequestError {
+export interface RequestError {
   name: string;
   code: number;
   message: string;
 }
 
-type ReturnRequest<T> = (Promise<T> | Promise<void>) & { cancel: () => void };
+export type ReturnRequest<T> = Promise<T | void> & { cancel: () => void };
 
 function sendRequest<T>(_options: RequestOptions) {
   const controller = new AbortController();
@@ -36,8 +36,8 @@ function sendRequest<T>(_options: RequestOptions) {
       },
       body: data ? (data instanceof FormData ? data : JSON.stringify(data)) : undefined,
       cache: "no-store",
-      credentials: "include",
-      options: controller.signal,
+      // credentials: "include",
+      signal: controller.signal,
     },
     rest
   );
@@ -83,9 +83,9 @@ function sendRequest<T>(_options: RequestOptions) {
       }
       throw response;
     })
-    .catch((error: RequestError) => {
+    .catch((error: RequestError | DOMException) => {
       if (error.name === "AbortError") {
-        console.error("The user aborted a request.");
+        console.error(error.message);
       } else {
         errorHandler(error);
       }

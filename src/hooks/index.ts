@@ -1,4 +1,4 @@
-import { typeUtils } from "@/utils";
+import { RequestError, RequestOptions, ReturnRequest, http, typeUtils } from "@/utils";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 export const useMount = (fn: () => void) => {
@@ -27,7 +27,6 @@ export const useSetState = <S extends Record<string, any>>(initialState: S): [S,
   const newSetState = useCallback((update) => {
     setState((prevState) => {
       if (update) {
-        console.log(update);
         const newState = typeUtils.isFunction(update) ? update(prevState) : update;
         return { ...prevState, newState };
       }
@@ -36,3 +35,36 @@ export const useSetState = <S extends Record<string, any>>(initialState: S): [S,
   }, []);
   return [state, newSetState];
 };
+
+export function useFetch<T>({
+  url,
+  data,
+  method,
+  params,
+}: RequestOptions): [T, boolean, RequestError] {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [value, setValue] = useState<T | undefined>();
+  const [error, setError] = useState<RequestError | undefined>();
+
+  const callback: () => ReturnRequest<T> = useCallback(() => {
+    return http.send({ url, data, method, params });
+  }, [url, data, method, params]);
+
+  useEffect(() => {
+    setLoading(true);
+    setValue(undefined);
+    setError(undefined);
+    const request: ReturnRequest<T> = callback();
+    request
+      .then((data: T) => setValue(data))
+      .catch(setError)
+      .finally(() => setLoading(false));
+
+    return () => {
+      request.cancel();
+      setLoading(false);
+    };
+  }, [callback]);
+
+  return [value, loading, error];
+}

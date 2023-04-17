@@ -7,7 +7,7 @@ const appPath = require("./path");
 
 module.exports = merge(common, {
   mode: "development",
-  devtool: "eval-cheap-module-source-map",
+  devtool: "eval-source-map",
   cache: {
     type: "filesystem",
     cacheDirectory: appPath.get("node_modules/.cache"),

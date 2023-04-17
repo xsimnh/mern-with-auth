@@ -10,19 +10,26 @@ app.all("*", function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE");
   res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
+  res.header("Access-Control-Expose-Headers", "Content-Disposition");
   next();
 });
 
 app.get("/json", function (req, res) {
-  res.json({
-    code: 200,
-    message: null,
-    data: true,
-  });
+  const random = Math.random();
+  if (random > 0.5) {
+    res.json({
+      code: 200,
+      message: null,
+      data: true,
+    });
+  }
+  res.status(502).send({ message: "custom error" });
 });
 
 app.post("/file", function (req, res) {
-  res.download(path.resolve(__dirname, "./test.md"));
+  setTimeout(() => {
+    res.download(path.resolve(__dirname, "./test.md"));
+  }, 3000);
 });
 
 app.listen("9000", function () {
