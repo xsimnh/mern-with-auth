@@ -4,7 +4,7 @@ const proxy = require("express-http-proxy");
 const https = require("https");
 const fs = require("fs");
 
-const appPath = require("./path");
+const appPath = require("../scripts/path");
 const app = express();
 
 app.use(compression());

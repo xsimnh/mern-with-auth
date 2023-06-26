@@ -9,7 +9,7 @@ export const enum HttpMethod {
 
 export interface RequestOptions extends RequestInit {
   url?: string;
-  data?: BodyInit | null;
+  data?: Record<string, any> | null;
   params?: Record<string, any>;
   method?: HttpMethod;
 }
@@ -116,13 +116,13 @@ export const http = {
   get: <T>(url: string, params?: Record<string, any>) => {
     return sendRequest<T>({ method: HttpMethod.GET, url, params });
   },
-  post: <T>(url: string, data?: BodyInit | null, params?: Record<string, any>) => {
+  post: <T>(url: string, data?: Record<string, any> | null, params?: Record<string, any>) => {
     return sendRequest<T>({ method: HttpMethod.POST, url, data, params });
   },
-  put: <T>(url: string, data?: BodyInit | null, params?: Record<string, any>) => {
+  put: <T>(url: string, data?: Record<string, any> | null, params?: Record<string, any>) => {
     return sendRequest<T>({ method: HttpMethod.PUT, url, data, params });
   },
-  delete: <T>(url: string, data?: BodyInit | null, params?: Record<string, any>) => {
+  delete: <T>(url: string, data?: Record<string, any> | null, params?: Record<string, any>) => {
     return sendRequest<T>({ method: HttpMethod.DELETE, url, data, params });
   },
 };

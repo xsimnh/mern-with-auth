@@ -1,6 +1,7 @@
 /public/**
 /wwwroot/**
 /scripts/**
+/server/**
 
 /**/*.css
 /**/*.less

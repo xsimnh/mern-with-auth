@@ -1,5 +1,5 @@
 {
-  "name": "react-template",
+  "name": "mern-with-auth",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,11 +10,11 @@
     "prod": "cross-env NODE_ENV=production webpack --config scripts/webpack.prod.js",
     "eslint": "eslint src/**",
     "eslint fix": "eslint src/** --fix",
-    "serve": "npm run build & node scripts/serve.js"
+    "serve": "npm run build & node server/app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xsimnh/react-template.git"
+    "url": "git+https://github.com/xsimnh/mern-with-auth.git"
   },
   "keywords": [
     "react"
@@ -22,9 +22,9 @@
   "author": "xsimnh",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/xsimnh/react-template/issues"
+    "url": "https://github.com/xsimnh/mern-with-auth/issues"
   },
-  "homepage": "https://xsimnh.github.io/react-template",
+  "homepage": "https://xsimnh.github.io/mern-with-auth",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
