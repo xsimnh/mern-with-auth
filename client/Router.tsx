@@ -1,5 +1,6 @@
 import React from "react";
 import { Outlet, Link, useRoutes, type RouteObject } from "react-router-dom";
+import Login from "./pages/Login";
 
 const Home = React.lazy(() => import(/* webpackChunkName: "home" */ "./pages/Home"));
 const About = React.lazy(() => import(/* webpackChunkName: "about" */ "./pages/About"));
@@ -31,6 +32,10 @@ function Router() {
           ),
         },
       ],
+    },
+    {
+      path: "/login",
+      element: <Login />,
     },
   ];
   return useRoutes(routes);

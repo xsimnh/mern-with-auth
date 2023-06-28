@@ -9,7 +9,7 @@ const appPath = require("./path");
 module.exports = {
   target: "browserslist",
   entry: {
-    index: "./src/index.tsx",
+    index: "./client/index.tsx",
   },
   output: {
     clean: true,
