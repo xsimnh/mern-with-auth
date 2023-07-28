@@ -29,11 +29,12 @@ function Home() {
 
   const [options, setOptions] = useState<RequestOptions>({
     method: HttpMethod.POST,
-    url: "http://127.0.0.1:9000/file",
+    url: "/api/file",
   });
   const [data, loading, error] = useFetch<boolean>(options);
   setTimeout(() => {
-    setOptions({ url: "http://127.0.0.1:9000/json" });
+    // download file api is cancelled, because the api return data after 3s
+    setOptions({ url: "/api/json" });
   }, 2000);
 
   return (

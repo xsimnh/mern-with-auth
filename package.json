@@ -10,7 +10,8 @@
     "prod": "cross-env NODE_ENV=production webpack --config scripts/webpack.prod.js",
     "eslint": "eslint client/**",
     "eslint fix": "eslint client/** --fix",
-    "serve": "npm run build & node server/app.js"
+    "serve": "node server/app.js",
+    "mock": "node mock/mock.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,16 @@
   },
   "homepage": "https://xsimnh.github.io/mern-with-auth",
   "dependencies": {
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-http-proxy": "^1.6.3",
+    "express-session": "^1.17.3",
+    "helmet": "^7.0.0",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.1",
+    "passport-local": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.2"
@@ -44,7 +55,6 @@
     "@typescript-eslint/parser": "^5.55.0",
     "babel-loader": "^9.1.2",
     "case-sensitive-paths-webpack-plugin": "^2.4.0",
-    "compression": "^1.7.4",
     "copy-webpack-plugin": "^11.0.0",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.3",
@@ -52,11 +62,10 @@
     "eslint": "^8.36.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "express": "^4.18.2",
-    "express-http-proxy": "^1.6.3",
     "html-webpack-plugin": "^5.5.0",
     "less-loader": "^11.1.0",
     "mini-css-extract-plugin": "^2.7.2",
+    "nodemon": "^2.0.22",
     "postcss-loader": "^7.0.2",
     "postcss-preset-env": "^8.0.1",
     "react-refresh": "^0.14.0",

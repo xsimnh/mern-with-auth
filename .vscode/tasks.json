@@ -4,25 +4,21 @@
     {
       "type": "npm",
       "script": "start",
-      "problemMatcher": [],
       "label": "npm: start"
     },
     {
       "type": "npm",
       "script": "build",
-      "problemMatcher": [],
       "label": "npm: build"
     },
     {
       "type": "npm",
       "script": "watch",
-      "problemMatcher": [],
       "label": "npm: watch"
     },
     {
       "type": "npm",
       "script": "prod",
-      "problemMatcher": [],
       "label": "npm: prod"
     },
     {
@@ -36,8 +32,20 @@
     {
       "type": "npm",
       "script": "serve",
-      "problemMatcher": [],
       "label": "npm: serve"
+    },
+    {
+      "type": "npm",
+      "script": "mock",
+      "label": "npm: mock"
+    },
+    {
+      "label": "serve web",
+      "dependsOn": [
+        "npm: build",
+        "npm: mock",
+        "npm: serve",
+      ]
     }
   ]
 }

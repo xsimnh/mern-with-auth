@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const express = require("express");
 const path = require("path");
-const bodyParser = require("body-parser");
 
 const app = express();
 
-app.use(bodyParser.json());
+app.use(express.json());
 app.all("*", function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE");
@@ -28,7 +27,7 @@ app.get("/json", function (req, res) {
 
 app.post("/file", function (req, res) {
   setTimeout(() => {
-    res.download(path.resolve(__dirname, "./test.md"));
+    res.download(path.resolve(__dirname, "./download.txt"));
   }, 3000);
 });
 

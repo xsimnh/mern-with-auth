@@ -49,6 +49,9 @@ function sendRequest<T>(_options: RequestOptions) {
   const request: ReturnRequest<T> = window
     .fetch(url, options)
     .then(async (response: Response) => {
+      if (response.redirected) {
+        return response;
+      }
       if (!response.ok) {
         throw { code: response.status, message: response.statusText };
       }
@@ -69,7 +72,11 @@ function sendRequest<T>(_options: RequestOptions) {
       const blob = await response.blob();
       return { filename, blob };
     })
-    .then((response: { filename?: string; blob?: Blob; code?: number; data?: T }) => {
+    .then((response: { filename?: string; blob?: Blob; code?: number; data?: T } & Response) => {
+      if (response.redirected) {
+        window.location.href = response.url;
+        return;
+      }
       if (response.filename) {
         const link = document.createElement("a");
         link.download = response.filename;
