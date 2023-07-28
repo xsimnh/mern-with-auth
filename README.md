@@ -19,4 +19,14 @@ $ npm run eslint fix // check eslint rule and auto fix problems
 $ npm run prod // build static files with compression, then use gh-pages or other tools to serve static site
 ```
 
-### server side 
+### server side
+
+```terminal
+// start mock api
+$ npm run mock
+
+// serve web app
+$ npm run serve
+```
+
+or using vscode task, see details in [tasks.json](./.vscode/tasks.json)
