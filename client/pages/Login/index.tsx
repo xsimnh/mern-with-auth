@@ -2,30 +2,18 @@ import { http } from "@/utils";
 import React, { useState } from "react";
 
 function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
   const login = () => {
-    http.post("/login", { username, password });
+    http
+      .post<string>("/login", { username, password })
+      .then((message: string) => setError(message));
   };
   const onsubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
-
-    // const params = new URLSearchParams();
-    // params.append("username", username);
-    // params.append("password", password);
-    // fetch("/login", {
-    //   method: "POST",
-    //   body: params,
-    // })
-    //   .then((res) => {
-    //     console.log(res);
-    //     if (res.redirected) {
-    //       window.location.href = res.url;
-    //     }
-    //   })
-    //   .catch((error) => console.log(error));
     return false;
   };
 
@@ -51,6 +39,7 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+        {error && <div style={{ color: "red" }}>{error}</div>}
         <div>
           {/* <input type="submit" value="Login" /> */}
           <button onClick={login}>Login</button>
