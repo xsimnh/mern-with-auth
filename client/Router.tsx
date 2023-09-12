@@ -1,6 +1,7 @@
 import React from "react";
 import { Outlet, Link, useRoutes, type RouteObject } from "react-router-dom";
 import Login from "./pages/Login";
+import Register from "./pages/Login/Register";
 
 const Home = React.lazy(() => import(/* webpackChunkName: "home" */ "./pages/Home"));
 const About = React.lazy(() => import(/* webpackChunkName: "about" */ "./pages/About"));
@@ -36,6 +37,10 @@ function Router() {
     {
       path: "/login",
       element: <Login />,
+    },
+    {
+      path: "/register",
+      element: <Register />,
     },
   ];
   return useRoutes(routes);

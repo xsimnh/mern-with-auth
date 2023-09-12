@@ -42,7 +42,7 @@
     {
       "label": "serve web",
       "dependsOn": [
-        "npm: build",
+        "npm: watch",
         "npm: mock",
         "npm: serve",
       ]

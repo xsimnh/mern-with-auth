@@ -1,5 +1,5 @@
 const config = {
-  prefix: "xxx_", // project name
+  prefix: "mern_", // project name
 };
 
 function getKey(key: string) {
@@ -44,7 +44,7 @@ function clearStorage(type: storageType) {
 
 export const localStorage = {
   get: function (key: string) {
-    getStorage("localStorage", key);
+    return getStorage("localStorage", key);
   },
   set: function (key: string, value: any) {
     setStorage("localStorage", key, value);
@@ -59,7 +59,7 @@ export const localStorage = {
 
 export const sessionStorage = {
   get: function (key: string) {
-    getStorage("sessionStorage", key);
+    return getStorage("sessionStorage", key);
   },
   set: function (key: string, value: any) {
     setStorage("sessionStorage", key, value);
