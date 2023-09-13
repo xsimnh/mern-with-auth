@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkreact_template=self.webpackChunkreact_template||[]).push([[443],{525:function(e,t,u){u.r(t);var a=u(294);t.default=function(){return a.createElement("div",null,"About")}}}]);
