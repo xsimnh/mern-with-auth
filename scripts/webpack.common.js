@@ -1,7 +1,6 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-// const CopyPlugin = require("copy-webpack-plugin");
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const appPath = require("./path");
@@ -87,17 +86,6 @@ module.exports = {
       cache: false,
       minify: isDevelopment ? false : true,
     }),
-    // new CopyPlugin({
-    //   patterns: [
-    //     {
-    //       from: "public/**",
-    //       to: "[name][ext]",
-    //       globOptions: {
-    //         ignore: ["**/index.html"],
-    //       },
-    //     },
-    //   ],
-    // }),
   ],
   resolve: {
     modules: ["./node_modules"],
