@@ -1,4 +1,4 @@
-import { http, localStorage } from "@/utils";
+import { http } from "@/utils";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -16,9 +16,6 @@ function Login() {
     http.post<returnType>("/api/login", { email, password }).then((data: returnType) => {
       if (data.message) {
         setError(data.message);
-      }
-      if (data.token) {
-        localStorage.set("token", data.token);
       }
     });
   };

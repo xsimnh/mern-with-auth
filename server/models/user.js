@@ -1,5 +1,7 @@
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
+const config = require("../config");
 const Schema = mongoose.Schema;
 const UserSchema = new Schema({
   first_name: { type: String, required: true, max: 100 },
@@ -17,6 +19,15 @@ UserSchema.pre("save", async function (next) {
 
 UserSchema.methods.comparePassword = function (password) {
   return bcrypt.compare(password, this.password);
+};
+
+UserSchema.methods.generateJWT = function (callback) {
+  return jwt.sign(
+    { email: this.email, id: this._id },
+    config.secretOrKey,
+    { expiresIn: config.expires },
+    callback
+  );
 };
 
 module.exports = mongoose.model("User", UserSchema);

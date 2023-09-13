@@ -12,19 +12,19 @@ const auth = require("./middlewares/auth");
 const errorHandler = require("./middlewares/errorHandler");
 const appPath = require("../scripts/path");
 const authController = require("./controllers/auth");
-const config = require("./config");
 
 const app = express();
-
 require("./config/db")();
+app.use(passport.initialize());
+app.use((req, res, next) => {
+  req.passport = passport;
+  next();
+});
 require("./config/passport")(passport);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({ secret: config.secretOrKey, cookie: { maxAge: 1000 * 60 * 1 } }));
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(
   cors({
     origin: [`https://${process.env.HOST}`, `http://${process.env.HOST}`, `${process.env.HOST}`],
@@ -36,7 +36,6 @@ if (process.env.NODE_ENV === "production") {
   app.use(helmet());
   app.use(compression());
 }
-
 app.use(
   express.static(appPath.wwwroot, {
     dotfiles: "ignore",

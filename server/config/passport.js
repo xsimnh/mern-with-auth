@@ -1,30 +1,25 @@
-const bcrypt = require("bcrypt");
+const passportJWT = require("passport-jwt");
+const ExtractJwt = passportJWT.ExtractJwt;
+const JwtStrategy = passportJWT.Strategy;
+
 const User = require("../models/user");
-const LocalStrategy = require("passport-local").Strategy;
+const config = require("../config");
+
+const jwtOptions = {
+  jwtFromRequest: ExtractJwt.fromExtractors([
+    (req) => req.cookies["authorization"],
+    ExtractJwt.fromUrlQueryParameter("access_token"),
+    ExtractJwt.fromAuthHeaderWithScheme("Bearer"),
+  ]),
+  secretOrKey: config.secretOrKey,
+};
 
 module.exports = function initPassport(passport) {
   passport.use(
-    "local",
-    new LocalStrategy({ usernameField: "email" }, async function (email, password, done) {
-      try {
-        const user = await User.findOne({ email }, null, {
-          collation: { locale: "en", strength: 2 },
-        });
-        if (user && user.active) {
-          const pass = bcrypt.compareSync(password, user.password);
-          if (pass) {
-            return done(null, user);
-          }
-          return done(null, false, {
-            message: "The email or password is incorrect, please check and try it again.",
-          });
-        }
-        return done(null, false, {
-          message: `Cannot find email: ${email}, you should register first.`,
-        });
-      } catch (error) {
-        return done(error);
-      }
+    new JwtStrategy(jwtOptions, function (payload, done) {
+      User.findById(payload.id)
+        .then((user) => done(null, user ?? false))
+        .catch((error) => done(error));
     })
   );
   passport.serializeUser(function (user, done) {

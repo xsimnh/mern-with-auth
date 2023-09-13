@@ -15,10 +15,11 @@ async function login(req, res, next) {
     if (user && user.active) {
       const pass = await user.comparePassword(password);
       if (pass) {
-        return req.logIn(user, function (err) {
+        return user.generateJWT(function (err, token) {
           if (err) {
             throw err;
           }
+          res.cookie("authorization", token, { httpOnly: true });
           res.redirect("/");
         });
       }
@@ -66,7 +67,7 @@ async function register(req, res, next) {
       data: "Registration complete! You can login with your new account now.",
     });
   } catch (error) {
-    console.log(error);
+    return next(error);
   }
 }
 
