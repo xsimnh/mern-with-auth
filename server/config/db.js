@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
-const config = require("../config");
 
 module.exports = function initDB() {
-  const DB_URL = process.env.DB_URL || config.DB_URL;
+  const MONGODB_URI = process.env.MONGODB_URI;
   mongoose
-    .connect(DB_URL)
-    .then(() => console.info(`Connected to ${DB_URL}...`))
+    .connect(MONGODB_URI)
+    .then(() => console.info(`Connected to ${MONGODB_URI}...`))
     .catch((error) => console.error(error));
 };

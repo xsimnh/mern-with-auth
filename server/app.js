@@ -1,4 +1,6 @@
+require("dotenv").config();
 const express = require("express");
+const ms = require("ms");
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
@@ -40,20 +42,19 @@ app.use(
     dotfiles: "ignore",
     etag: true,
     extensions: ["html"],
-    index: false,
-    maxAge: 1000 * 60 * 1,
-    expires: 1000 * 60 * 1,
-    setHeaders: function (res, path, stat) {
-      res.set("x-timestamp", Date.now());
-      res.set("expires", new Date(Date.now() + 1000 * 60 * 1).toGMTString());
-    },
+    // maxAge: ms("1y"),
+    // expires: ms("1y"),
+    // setHeaders: function (res, path, stat) {
+    //   res.set("x-timestamp", Date.now());
+    // },
   })
 );
 app.use(auth);
 app.post("/api/login", authController.login);
 app.post("/api/register", authController.register);
-app.use(errorHandler);
 app.use("/api", proxy("http://localhost:9000"));
+app.use(errorHandler);
+
 app.get("*", function (req, res, next) {
   res.sendFile("index.html", { root: appPath.wwwroot });
 });
@@ -77,7 +78,7 @@ function normalizePort(val) {
   return false;
 }
 const host = "localhost";
-const port = normalizePort(process.env.PORT || "7100");
+const port = normalizePort(process.env.PORT);
 const server = https.createServer(options, app);
 server.listen(port, host, function () {
   console.log("server url is: https://%s:%s", host, port);

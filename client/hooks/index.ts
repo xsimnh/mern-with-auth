@@ -42,6 +42,7 @@ export function useFetch<T>({
   method,
   params,
 }: RequestOptions): [T, boolean, RequestError] {
+  // better to use a global loading backdrop
   const [loading, setLoading] = useState<boolean>(false);
   const [value, setValue] = useState<T | undefined>();
   const [error, setError] = useState<RequestError | undefined>();

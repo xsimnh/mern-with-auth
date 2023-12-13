@@ -14,7 +14,7 @@ function Login() {
 
   const login = () => {
     http.post<returnType>("/api/login", { email, password }).then((data: returnType) => {
-      if (data.message) {
+      if (data?.message) {
         setError(data.message);
       }
     });

@@ -1,7 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
-const config = require("../config");
 const Schema = mongoose.Schema;
 const UserSchema = new Schema({
   first_name: { type: String, required: true, max: 100 },
@@ -24,8 +23,8 @@ UserSchema.methods.comparePassword = function (password) {
 UserSchema.methods.generateJWT = function (callback) {
   return jwt.sign(
     { email: this.email, id: this._id },
-    config.secretOrKey,
-    { expiresIn: config.expires },
+    process.env.ACCESS_TOKEN_SECRET,
+    { expiresIn: process.env.ACCESS_TOKEN_EXPIRES },
     callback
   );
 };

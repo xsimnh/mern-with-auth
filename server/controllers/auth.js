@@ -19,7 +19,7 @@ async function login(req, res, next) {
           if (err) {
             throw err;
           }
-          res.cookie("authorization", token, { httpOnly: true });
+          res.cookie("x-access-token", token, { httpOnly: true });
           res.redirect("/");
         });
       }

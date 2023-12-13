@@ -6,14 +6,16 @@ Tech stack contains: react, express and mongodb.
 
 ## configuration
 
-Set your own mongodb url in `server/config.js`.
+create your own environment parameters in an env file, an example in `.env.example`
 
-```js
-module.exports = {
-  DB_URL: "YOUR_OWN_MONGODB_URL",
-  secretOrKey: "xsimnh",
-  expires: "1m",
-};
+```
+NODE_ENV = development
+PORT = YOUR_OWN_PORT
+ACCESS_TOKEN_SECRET = YOUR_OWN_ACCESS_TOKEN_SECRET
+REFRESH_TOKEN_SECRET = YOUR_OWN_REFRESH_TOKEN_SECRET
+ACCESS_TOKEN_EXPIRES = YOUR_OWN_ACCESS_TOKEN_EXPIRES
+REFRESH_TOKEN_EXPIRES = YOUR_OWN_REFRESH_TOKEN_EXPIRES
+MONGODB_URI = YOUR_OWN_MONGODB_URI
 ```
 
 ## quick start

@@ -3,19 +3,15 @@ const ExtractJwt = passportJWT.ExtractJwt;
 const JwtStrategy = passportJWT.Strategy;
 
 const User = require("../models/user");
-const config = require("../config");
 
 const jwtOptions = {
-  jwtFromRequest: ExtractJwt.fromExtractors([
-    (req) => req.cookies["authorization"],
-    ExtractJwt.fromUrlQueryParameter("access_token"),
-    ExtractJwt.fromAuthHeaderWithScheme("Bearer"),
-  ]),
-  secretOrKey: config.secretOrKey,
+  jwtFromRequest: ExtractJwt.fromExtractors([(req) => req.cookies["x-access-token"]]),
+  secretOrKey: process.env.ACCESS_TOKEN_SECRET,
 };
 
 module.exports = function initPassport(passport) {
   passport.use(
+    "jwt",
     new JwtStrategy(jwtOptions, function (payload, done) {
       User.findById(payload.id)
         .then((user) => done(null, user ?? false))
